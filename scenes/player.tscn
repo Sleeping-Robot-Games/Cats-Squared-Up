@@ -1,28 +1,31 @@
-[gd_scene load_steps=3 format=3 uid="uid://bl3p34ygy8w5w"]
+[gd_scene load_steps=4 format=3 uid="uid://bl3p34ygy8w5w"]
 
 [ext_resource type="Texture2D" uid="uid://cngjb385ts1a6" path="res://icon.svg" id="1_q07ik"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6hffp"]
+size = Vector2(22, 20)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hc8tq"]
-size = Vector2(116, 118)
+size = Vector2(63, 118)
 
 [node name="Player" type="CharacterBody2D"]
 
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="HitCollider" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(48, -43)
+shape = SubResource("RectangleShape2D_6hffp")
+disabled = true
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-5, 0.499994)
+scale = Vector2(0.53125, 0.992188)
 texture = ExtResource("1_q07ik")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="Body" type="CollisionShape2D" parent="."]
+position = Vector2(-4, 0)
 shape = SubResource("RectangleShape2D_hc8tq")
 
-[node name="Colliders" type="Node2D" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 
-[node name="HandColliders" type="Node2D" parent="Colliders"]
-
-[node name="LeftHand" type="Area2D" parent="Colliders/HandColliders"]
-
-[node name="RightHand" type="Area2D" parent="Colliders/HandColliders"]
-
-[node name="FeetColliders" type="Node2D" parent="Colliders"]
-
-[node name="LeftFoot" type="Area2D" parent="Colliders/FeetColliders"]
-
-[node name="RightFoot" type="Area2D" parent="Colliders/FeetColliders"]
+[node name="AnimationTree" type="AnimationTree" parent="."]
