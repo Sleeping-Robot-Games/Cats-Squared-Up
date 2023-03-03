@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://bl3p34ygy8w5w"]
+
+[ext_resource type="Texture2D" uid="uid://cngjb385ts1a6" path="res://icon.svg" id="1_q07ik"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hc8tq"]
+size = Vector2(116, 118)
+
+[node name="Player" type="CharacterBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_q07ik")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_hc8tq")
+
+[node name="Colliders" type="Node2D" parent="."]
+
+[node name="HandColliders" type="Node2D" parent="Colliders"]
+
+[node name="LeftHand" type="Area2D" parent="Colliders/HandColliders"]
+
+[node name="RightHand" type="Area2D" parent="Colliders/HandColliders"]
+
+[node name="FeetColliders" type="Node2D" parent="Colliders"]
+
+[node name="LeftFoot" type="Area2D" parent="Colliders/FeetColliders"]
+
+[node name="RightFoot" type="Area2D" parent="Colliders/FeetColliders"]
