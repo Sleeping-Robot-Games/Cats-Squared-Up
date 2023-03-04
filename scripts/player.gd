@@ -41,6 +41,9 @@ func _process(delta):
 func attempt_combo(combo: Array = []):
 	if(combo.has("L")):
 		if is_crouching:
-			anim_tree.travel("straight_punch")
-		else:
 			anim_tree.travel("crouch_punch")
+			return
+		else:
+			print("punching!")
+			anim_tree.travel("straight_punch")
+			return
