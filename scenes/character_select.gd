@@ -17,6 +17,7 @@ func _on_cat_select(num: String):
 	# TODO: put p1_cat details into global state to start the game?
 	
 # TODO: Implement focus change with controller for p2
+## maybe a simple int that increments/decrements and skips over current p1 cat
 
 func _on_fight_button_up():
 	# Check to make sure the player cat info is in global state before continuing
