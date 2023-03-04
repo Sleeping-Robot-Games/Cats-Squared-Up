@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b5u8etl8yoxd1"
-path="res://.godot/imported/meow_knight.png-a30fab92923108c8273be95a1acd89fb.ctex"
+uid="uid://b8qleqiljhopf"
+path="res://.godot/imported/street.png-bdb92988ffa4c21efa4b2a1dedc750e2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/meow_knight/meow_knight.png"
-dest_files=["res://.godot/imported/meow_knight.png-a30fab92923108c8273be95a1acd89fb.ctex"]
+source_file="res://assets/street.png"
+dest_files=["res://.godot/imported/street.png-bdb92988ffa4c21efa4b2a1dedc750e2.ctex"]
 
 [params]
 
