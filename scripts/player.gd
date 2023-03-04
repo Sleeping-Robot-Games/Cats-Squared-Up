@@ -7,7 +7,7 @@ var input_buffer: Array = []
 
 @onready var anim_tree = $AnimationTree.get("parameters/playback")
 
-var commonMoves: Dictionary = m.moves["Common"]
+var common_moves: Dictionary = m.moves["common"]
 
 func _input(event):
 	if event is InputEventKey:

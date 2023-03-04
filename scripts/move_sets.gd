@@ -1,14 +1,14 @@
 extends Node
 
-var commonMoves = {
+var common_moves: Dictionary = {
 	"punch" : "punch"
 }
 
-var meowKnightMoves: Dictionary = {
+var meow_knight_moves: Dictionary = {
 	"debug" : "debug"
 }
 
 var moves: Dictionary = {
-	"Common" : commonMoves,
-	"MeowKnight" : meowKnightMoves
+	"common" : common_moves,
+	"meow_knight" : meow_knight_moves
 }
