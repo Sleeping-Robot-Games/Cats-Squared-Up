@@ -1,0 +1,88 @@
+[gd_scene load_steps=4 format=3 uid="uid://bvcetonjrajlu"]
+
+[ext_resource type="Script" path="res://scenes/character_select.gd" id="1_mcqvc"]
+[ext_resource type="PackedScene" uid="uid://dj70nt47n7w2" path="res://scenes/cat_button.tscn" id="2_u2bel"]
+[ext_resource type="FontFile" uid="uid://cfyq3y88px8p3" path="res://resources/04B_30__.TTF" id="2_yr77d"]
+
+[node name="CharacterSelect" type="Node2D"]
+script = ExtResource("1_mcqvc")
+
+[node name="Cats" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Cat1" parent="Cats" instance=ExtResource("2_u2bel")]
+layout_mode = 0
+offset_left = 55.0
+offset_top = 86.0
+offset_right = 190.0
+offset_bottom = 213.0
+
+[node name="Cat2" parent="Cats" instance=ExtResource("2_u2bel")]
+layout_mode = 0
+offset_left = 190.0
+offset_top = 86.0
+offset_right = 325.0
+offset_bottom = 213.0
+
+[node name="Cat3" parent="Cats" instance=ExtResource("2_u2bel")]
+layout_mode = 0
+offset_left = 325.0
+offset_top = 86.0
+offset_right = 460.0
+offset_bottom = 213.0
+
+[node name="Cat4" parent="Cats" instance=ExtResource("2_u2bel")]
+layout_mode = 0
+offset_left = 460.0
+offset_top = 86.0
+offset_right = 595.0
+offset_bottom = 213.0
+
+[node name="Cat5" parent="Cats" instance=ExtResource("2_u2bel")]
+layout_mode = 0
+offset_left = 55.0
+offset_top = 213.0
+offset_right = 190.0
+offset_bottom = 340.0
+
+[node name="Cat6" parent="Cats" instance=ExtResource("2_u2bel")]
+layout_mode = 0
+offset_left = 190.0
+offset_top = 213.0
+offset_right = 325.0
+offset_bottom = 340.0
+
+[node name="Cat7" parent="Cats" instance=ExtResource("2_u2bel")]
+layout_mode = 0
+offset_left = 325.0
+offset_top = 213.0
+offset_right = 460.0
+offset_bottom = 340.0
+
+[node name="Cat8" parent="Cats" instance=ExtResource("2_u2bel")]
+layout_mode = 0
+offset_left = 460.0
+offset_top = 213.0
+offset_right = 595.0
+offset_bottom = 340.0
+
+[node name="Label" type="Label" parent="."]
+offset_left = 171.0
+offset_top = 23.0
+offset_right = 477.0
+offset_bottom = 63.0
+theme_override_fonts/font = ExtResource("2_yr77d")
+theme_override_font_sizes/font_size = 36
+text = "Select Cat"
+
+[node name="Fight" type="Button" parent="."]
+offset_left = 240.0
+offset_top = 384.0
+offset_right = 404.0
+offset_bottom = 440.0
+text = "FIGHT"
+
+[connection signal="button_up" from="Fight" to="." method="_on_fight_button_up"]
