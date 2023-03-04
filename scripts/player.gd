@@ -31,6 +31,8 @@ func _input(event):
 			anim_tree.travel("jump")
 
 func _process(delta: float):
+	change_state()
+	
 	if(input_buffer.size() > 0):
 		time -= delta
 		if(time < 0):
@@ -71,11 +73,11 @@ func attempt_combo(combo: Array = []):
 			anim_tree.travel("straight_punch")
 			return
 
-func change_state(state: String):
-	print("change_state: ", state)
+func change_state():
+	## TODO: Maybe adjust logic so it's not setting the same var every frame
+	var state = anim_tree.get_current_node()
+	
 	if state == "jump" and is_on_floor():
-		print("jumping")
 		is_jumping = true
 	elif state == "fall":
-		print("falling")
 		is_jumping = false

@@ -21,8 +21,8 @@ m="*res://scripts/move_sets.gd"
 
 [display]
 
-window/size/viewport_width=960
-window/size/viewport_height=540
+window/size/viewport_width=640
+window/size/viewport_height=480
 
 [importer_defaults]
 
