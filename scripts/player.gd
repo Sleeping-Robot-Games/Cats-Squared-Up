@@ -10,15 +10,24 @@ var input_buffer: Array = []
 var common_moves: Dictionary = m.moves["common"]
 
 func _input(event):
-	if event is InputEventKey:
+	var is_punching = false
+	if (event is InputEventKey and event.is_action_just_pressed("keyboard_punch")) \
+	or (event is InputEventJoypadButton and event.is_action_pressed("joypad_punch")):
+		is_punching = true
+	
+	if is_punching:
+		time = input_window
+		input_buffer.append("punch")
+		return
+	#if event is InputEventKey:
 		# if input made, only signal it once
-		if event.pressed and not event.echo:
-			var keycode = OS.get_keycode_string(event.keycode)
+	#	if event.pressed and not event.echo:
+	#		var keycode = OS.get_keycode_string(event.keycode)
 			# ensure valid key
-			if "WASDL".find(keycode) >= 0:
-				time = input_window
-				input_buffer.append(keycode)
-				return
+	#		if "WASDL".find(keycode) >= 0:
+	#			time = input_window
+	#			input_buffer.append(keycode)
+	#			return
 
 func _process(delta):
 	if(input_buffer.size() > 0):
@@ -29,7 +38,8 @@ func _process(delta):
 			input_buffer.clear()
 			return
 	
-	if(Input.is_action_pressed("down")):
+	# TODO: device mapping
+	if(Input.is_action_pressed("keyboard_down") or Input.is_action_pressed("joypad_down")):
 		anim_tree.travel("crouch")
 		is_crouching = true
 		return
@@ -39,11 +49,13 @@ func _process(delta):
 		return
 
 func attempt_combo(combo: Array = []):
-	if(combo.has("L")):
+	print("combo: ", combo)
+	if(combo.has("punch")):
 		if is_crouching:
+			print("crouch_punch")
 			anim_tree.travel("crouch_punch")
 			return
 		else:
-			print("punching!")
+			print("straight_punching")
 			anim_tree.travel("straight_punch")
 			return
