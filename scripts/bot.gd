@@ -20,6 +20,7 @@ var is_attacking = false # check if AI is attacking
 var hp: int = 100
 var hit_enemies: Array = []
 const BASE_DMG: int = 5
+const HIT_SPEED: float = 200.0
 
 @onready var state_machine = $AnimationTree.get('parameters/playback')
 @onready var player_node = get_parent().get_node("Player")
@@ -36,10 +37,25 @@ func _ready():
 	
 func _process(delta):
 	countdown -= delta
+	
+	face_player()  # Make sure the AI always faces the player
+	
+	# getting hit
+	var state = state_machine.get_current_node()
+	print("bot state: " + state)
+	if state.ends_with('_hit'):
+		if state == 'crouch_hit':
+			velocity.x += (HIT_SPEED / 2) if scale.x < 0 else (HIT_SPEED / 2) * -1
+		elif state == 'straight_hit':
+			velocity.x += HIT_SPEED if scale.x < 0 else HIT_SPEED * -1
+		elif state == 'jump_hit':
+			velocity.x += HIT_SPEED if scale.x < 0 else HIT_SPEED * -1
+			velocity.y -= HIT_SPEED
+		move_and_slide()
+		return
+	
 	if(!is_attacking && countdown < 0):
 		choose_action()
-
-	face_player()  # Make sure the AI always faces the player
 
 	# Start moving
 	if(start_moving && time > 0 && !is_crouching):
@@ -108,6 +124,13 @@ func dmg(num: int, height: String = 'mid'):
 		state_machine.travel('straight_block')
 		print('blocked')
 		return
+	if is_on_floor():
+		if is_crouching:
+			state_machine.travel('crouch_hit')
+		else:
+			state_machine.travel('straight_hit')
+	else:
+		state_machine.travel('jump_hit')
 	hp -= num
 	if hp <= 0:
 		hp = 0

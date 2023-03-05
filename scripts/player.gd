@@ -121,7 +121,7 @@ func _process(delta: float):
 		velocity.x += HIT_SPEED if is_flipped else HIT_SPEED * -1
 	elif state == 'jump_hit':
 		velocity.x += HIT_SPEED if is_flipped else HIT_SPEED * -1
-		velocity.y -= HIT_SPEED if is_flipped else HIT_SPEED * -1
+		velocity.y -= HIT_SPEED
 	elif is_moving_left:
 		velocity.x -= MOVE_SPEED
 	elif is_moving_right:

@@ -1507,6 +1507,7 @@ graph_offset = Vector2(4.33746, -76.7341)
 [sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_mmfxm"]
 
 [node name="Bot" type="CharacterBody2D"]
+scale = Vector2(2, 2)
 script = ExtResource("1_athhj")
 
 [node name="HitArea" type="Area2D" parent="."]
@@ -1523,7 +1524,7 @@ shape = SubResource("RectangleShape2D_b43tg")
 texture = ExtResource("2_78lgh")
 hframes = 4
 vframes = 14
-frame = 2
+frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
