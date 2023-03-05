@@ -86,6 +86,10 @@ func _input(event):
 		or event.is_action_released('joypad_down'):
 			is_crouching = false
 			state_machine.travel('idle')
+		elif is_moving_left and is_crouching:
+			# TODO fix
+			print('crouch_block')
+			state_machine.travel('crouch_block')
 		elif event.is_action_pressed('keyboard_smash') \
 		or event.is_action_pressed('joypad_smash'):
 			state_machine.travel('cat_smash')
@@ -121,8 +125,10 @@ func _process(delta: float):
 	move_and_slide()
 
 func face_opponent():
-	# TODO set is_flipped
-	pass
+	var opponent = 'p2' if player == 'p1' else 'p1'
+	is_flipped = g.players[player].global_position.x > g.players[opponent].global_position.x
+	scale.x = -1 if is_flipped else 1
+	print(player + ' scale.x: ' + str(scale.x) + ' is_flipped:' + str(is_flipped))
 
 func process_state(state: String):
 	if state == 'jump' and is_on_floor():

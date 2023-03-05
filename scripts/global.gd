@@ -1,5 +1,10 @@
 extends Node
 
+var players: Dictionary = {
+	'p1': null,
+	'p2': null
+}
+
 var p1_cat: String = '1'
 var p2_cat: String = 'random'
 
