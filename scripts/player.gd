@@ -6,6 +6,7 @@ var is_jumping: bool = false
 var is_floating: bool = false
 var is_moving_left: bool = false
 var is_moving_right: bool = false
+var is_flipped: bool = false
 var input_buffer: Array = []
 var input_window: float = 0.1
 var time: float = input_window
@@ -33,22 +34,6 @@ func _input(event):
 		time = input_window
 		input_buffer.append('kick')
 		return
-	# jump / crouch / idle / smash
-	if is_on_floor():
-		if event.is_action_pressed('keyboard_up') \
-		or event.is_action_pressed('joypad_up'):
-			state_machine.travel('jump')
-		elif event.is_action_pressed('keyboard_down') \
-		or event.is_action_pressed('joypad_down'):
-			is_crouching = true
-			state_machine.travel('crouch_idle')
-		elif event.is_action_released('keyboard_down') \
-		or event.is_action_released('joypad_down'):
-			is_crouching = false
-			state_machine.travel('idle')
-		elif event.is_action_pressed('keyboard_smash') \
-		or event.is_action_pressed('joypad_smash'):
-			state_machine.travel('cat_smash')
 	# moving left
 	if event.is_action_pressed('keyboard_left') \
 	or event.is_action_pressed('joypad_left'):
@@ -63,6 +48,44 @@ func _input(event):
 	elif event.is_action_released('keyboard_right') \
 	or event.is_action_released('joypad_right'):
 		is_moving_right = false
+	# walk / idle / jump / crouch / smash
+	if is_on_floor():
+		print('on floor')
+		var state = state_machine.get_current_node()
+		var walk_left = 'walk_forward' if is_flipped else 'walk_backward'
+		var walk_right = 'walk_backward' if is_flipped else 'walk_forward'
+		if is_moving_left and (state == 'idle' or walk_right):
+			print('a')
+			var anim = walk_left
+			state_machine.travel(anim)
+		elif is_moving_right and (state == 'idle' or walk_left):
+			print('b')
+			var anim = walk_right
+			state_machine.travel(anim)
+		elif !is_moving_left and state == walk_left:
+			print('c ' + state)
+			state_machine.travel('idle')
+		elif !is_moving_right and state == walk_right:
+			print('d')
+			state_machine.travel('idle')
+		elif event.is_action_pressed('keyboard_up') \
+		or event.is_action_pressed('joypad_up'):
+			print('e')
+			state_machine.travel('jump')
+		elif event.is_action_pressed('keyboard_down') \
+		or event.is_action_pressed('joypad_down'):
+			print('f')
+			is_crouching = true
+			state_machine.travel('crouch_idle')
+		elif event.is_action_released('keyboard_down') \
+		or event.is_action_released('joypad_down'):
+			print('g')
+			is_crouching = false
+			state_machine.travel('idle')
+		elif event.is_action_pressed('keyboard_smash') \
+		or event.is_action_pressed('joypad_smash'):
+			print('h')
+			state_machine.travel('cat_smash')
 
 func correct_input(event) -> bool:
 	if (event is InputEventKey and g.player_input_devices[player] == 'keyboard') \
@@ -71,6 +94,7 @@ func correct_input(event) -> bool:
 	return false
 
 func _process(delta: float):
+	face_opponent()
 	process_state(state_machine.get_current_node())
 	if(input_buffer.size() > 0):
 		time -= delta
@@ -92,6 +116,10 @@ func _process(delta: float):
 	else:
 		velocity.y += FALL_SPEED
 	move_and_slide()
+
+func face_opponent():
+	# TODO set is_flipped
+	pass
 
 func process_state(state: String):
 	if state == 'jump' and is_on_floor():
