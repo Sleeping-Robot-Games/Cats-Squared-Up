@@ -13,12 +13,9 @@ const JUMP_SPEED: float = 200.0
 const FALL_SPEED: float = 200.0
 const MOVE_SPEED: float = 200.0
 
-@onready var anim_tree = $AnimationTree.get('parameters/playback')
+@onready var state_machine = $AnimationTree.get('parameters/playback')
 
 var common_moves: Dictionary = g.moves['common']
-
-func _ready():
-	print(g.player_input_devices)
 
 func _input(event):
 	if not correct_input(event):
@@ -30,19 +27,18 @@ func _input(event):
 		input_buffer.append('punch')
 		return
 	# jump / crouch / idle
-	print('floor: ' + str(is_on_floor()))
 	if is_on_floor():
 		if event.is_action_pressed('keyboard_up') \
 		or event.is_action_pressed('joypad_up'):
-			anim_tree.travel('jump')
+			state_machine.travel('jump')
 		elif event.is_action_pressed('keyboard_down') \
 		or event.is_action_pressed('joypad_down'):
 			is_crouching = true
-			anim_tree.travel('crouch')
+			state_machine.travel('crouch_idle')
 		elif event.is_action_released('keyboard_down') \
 		or event.is_action_released('joypad_down'):
 			is_crouching = false
-			anim_tree.travel('idle')
+			state_machine.travel('idle')
 	# moving left
 	if event.is_action_pressed('keyboard_left') \
 	or event.is_action_pressed('joypad_left'):
@@ -58,7 +54,14 @@ func _input(event):
 	or event.is_action_released('joypad_right'):
 		is_moving_right = false
 
+func correct_input(event) -> bool:
+	if (event is InputEventKey and g.player_input_devices[player] == 'keyboard') \
+	or (event is InputEventJoypadButton and g.player_input_devices[player] == 'joypad_' + str(event.device)):
+		return true
+	return false
+
 func _process(delta: float):
+	process_state(state_machine.get_current_node())
 	if(input_buffer.size() > 0):
 		time -= delta
 		if(time < 0):
@@ -78,26 +81,20 @@ func _process(delta: float):
 		velocity.y += FALL_SPEED
 	move_and_slide()
 
-func correct_input(event) -> bool:
-	if (event is InputEventKey and g.player_input_devices[player] == 'keyboard') \
-	or (event is InputEventJoypadButton and g.player_input_devices[player] == 'joypad_' + str(event.device)):
-		return true
-	return false
+func process_state(state: String):
+	if state == 'jump' and is_on_floor():
+		is_jumping = true
+	elif state == 'jump_fall':
+		is_jumping = false
+	if state == 'jump_fall' and is_on_floor():
+		state_machine.travel('jump_land')
 
 func attempt_combo(combo: Array = []):
 	print('combo: ', combo)
 	if(combo.has('punch')):
 		if is_crouching:
-			anim_tree.travel('crouch_punch')
+			state_machine.travel('crouch_punch')
 			return
 		else:
-			anim_tree.travel('straight_punch')
+			state_machine.travel('straight_punch')
 			return
-
-func change_state(state: String):
-	if state == 'jump' and is_on_floor():
-		print('jumping')
-		is_jumping = true
-	elif state == 'fall':
-		print('falling')
-		is_jumping = false
