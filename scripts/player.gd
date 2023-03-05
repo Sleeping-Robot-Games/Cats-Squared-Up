@@ -90,10 +90,14 @@ func process_state(state: String):
 		state_machine.travel('jump_land')
 
 func attempt_combo(combo: Array = []):
-	print('combo: ', combo)
+	#print('combo: ', combo)
+	var state = state_machine.get_current_node()
 	if(combo.has('punch')):
 		if is_crouching:
 			state_machine.travel('crouch_punch')
+			return
+		elif state == 'jump' or state == 'jump_fall':
+			state_machine.travel('jump_punch')
 			return
 		else:
 			state_machine.travel('straight_punch')
