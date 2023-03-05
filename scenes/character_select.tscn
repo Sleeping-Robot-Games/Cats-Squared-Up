@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dwfkgrax7ebiw"]
+[gd_scene load_steps=23 format=3 uid="uid://beqjahs5thjvf"]
 
 [ext_resource type="Script" path="res://scenes/character_select.gd" id="1_mcqvc"]
 [ext_resource type="PackedScene" uid="uid://dj2ev0w1whofn" path="res://scenes/cat_box.tscn" id="2_u2bel"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bxnbgra7vl5pa" path="res://assets/join_keys.png" id="4_yy71w"]
 [ext_resource type="Texture2D" uid="uid://ckhoyt447yvir" path="res://assets/enter_key.png" id="5_odd7q"]
 [ext_resource type="Texture2D" uid="uid://cqv8f44csujmv" path="res://assets/start_button.png" id="6_hj8mf"]
+[ext_resource type="AudioStream" uid="uid://deiqxpv1qhx3f" path="res://assets/sfx/bling.mp3" id="7_sh4ma"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3vr5y"]
 atlas = ExtResource("4_yy71w")
@@ -293,3 +294,11 @@ offset_bottom = 63.0
 theme_override_fonts/font = ExtResource("2_yr77d")
 theme_override_font_sizes/font_size = 36
 text = "Select Cat"
+
+[node name="Bling" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_sh4ma")
+
+[node name="StartGameTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="StartGameTimer" to="." method="_on_start_game_timer_timeout"]
