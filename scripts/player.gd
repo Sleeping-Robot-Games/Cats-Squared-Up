@@ -3,10 +3,11 @@ extends CharacterBody2D
 var player = 'p1'
 var is_crouching: bool = false
 var is_jumping: bool = false
+var is_floating: bool = false
 var is_moving_left: bool = false
 var is_moving_right: bool = false
 var input_buffer: Array = []
-var input_window: float = 0.2
+var input_window: float = 0.1
 var time: float = input_window
 
 const JUMP_SPEED: float = 200.0
@@ -25,6 +26,12 @@ func _input(event):
 	or event.is_action_pressed('joypad_punch'):
 		time = input_window
 		input_buffer.append('punch')
+		return
+	# kick
+	if event.is_action_pressed('keyboard_kick') \
+	or event.is_action_pressed('joypad_kick'):
+		time = input_window
+		input_buffer.append('kick')
 		return
 	# jump / crouch / idle
 	if is_on_floor():
@@ -77,6 +84,8 @@ func _process(delta: float):
 		velocity.x += MOVE_SPEED
 	if is_jumping:
 		velocity.y -= JUMP_SPEED
+	elif is_floating:
+		velocity.y += FALL_SPEED / 2
 	else:
 		velocity.y += FALL_SPEED
 	move_and_slide()
@@ -84,8 +93,12 @@ func _process(delta: float):
 func process_state(state: String):
 	if state == 'jump' and is_on_floor():
 		is_jumping = true
+	elif state == 'jump_punch' or state == 'jump_kick':
+		is_jumping = false
+		is_floating = true
 	elif state == 'jump_fall':
 		is_jumping = false
+		is_floating = false
 	if state == 'jump_fall' and is_on_floor():
 		state_machine.travel('jump_land')
 
@@ -101,4 +114,14 @@ func attempt_combo(combo: Array = []):
 			return
 		else:
 			state_machine.travel('straight_punch')
+			return
+	elif(combo.has('kick')):
+		if is_crouching:
+			state_machine.travel('crouch_kick')
+			return
+		elif state == 'jump' or state == 'jump_fall':
+			state_machine.travel('jump_kick')
+			return
+		else:
+			state_machine.travel('straight_kick')
 			return
