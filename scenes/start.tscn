@@ -1,8 +1,8 @@
 [gd_scene load_steps=10 format=3 uid="uid://fgydhvyk61dg"]
 
-[ext_resource type="Script" path="res://scripts/menu.gd" id="1_l3n23"]
+[ext_resource type="Script" path="res://scripts/start.gd" id="1_yghs3"]
 [ext_resource type="FontFile" uid="uid://cfyq3y88px8p3" path="res://resources/04B_30__.TTF" id="2_6jcwx"]
-[ext_resource type="AudioStream" uid="uid://deiqxpv1qhx3f" path="res://assets/sfx/bling.mp3" id="4_5wwuo"]
+[ext_resource type="AudioStream" uid="uid://cg1pwstmn5ny7" path="res://assets/sfx/menu_yes.mp3" id="4_mc5ll"]
 [ext_resource type="Texture2D" uid="uid://bxnbgra7vl5pa" path="res://assets/join_keys.png" id="5_8tp7r"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6dduv"]
@@ -42,7 +42,7 @@ animations = [{
 }]
 
 [node name="Start" type="Node2D"]
-script = ExtResource("1_l3n23")
+script = ExtResource("1_yghs3")
 
 [node name="Title" type="Label" parent="."]
 offset_left = 97.0
@@ -66,8 +66,8 @@ text = "Press           or           to begin"
 position = Vector2(120, 16)
 sprite_frames = SubResource("SpriteFrames_nigqs")
 
-[node name="Bling" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_5wwuo")
+[node name="MenuYes" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_mc5ll")
 
 [node name="CatSelectTimer" type="Timer" parent="."]
 wait_time = 0.22

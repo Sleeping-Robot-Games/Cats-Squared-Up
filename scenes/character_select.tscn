@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://beqjahs5thjvf"]
+[gd_scene load_steps=24 format=3 uid="uid://beqjahs5thjvf"]
 
 [ext_resource type="Script" path="res://scenes/character_select.gd" id="1_mcqvc"]
 [ext_resource type="PackedScene" uid="uid://dj2ev0w1whofn" path="res://scenes/cat_box.tscn" id="2_u2bel"]
@@ -6,7 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://bxnbgra7vl5pa" path="res://assets/join_keys.png" id="4_yy71w"]
 [ext_resource type="Texture2D" uid="uid://ckhoyt447yvir" path="res://assets/enter_key.png" id="5_odd7q"]
 [ext_resource type="Texture2D" uid="uid://cqv8f44csujmv" path="res://assets/start_button.png" id="6_hj8mf"]
-[ext_resource type="AudioStream" uid="uid://deiqxpv1qhx3f" path="res://assets/sfx/bling.mp3" id="7_sh4ma"]
+[ext_resource type="AudioStream" uid="uid://cg1pwstmn5ny7" path="res://assets/sfx/menu_yes.mp3" id="7_a2wg1"]
+[ext_resource type="AudioStream" uid="uid://cw421pj5umxob" path="res://assets/sfx/menu_no.mp3" id="8_ms1fs"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3vr5y"]
 atlas = ExtResource("4_yy71w")
@@ -295,8 +296,11 @@ theme_override_fonts/font = ExtResource("2_yr77d")
 theme_override_font_sizes/font_size = 36
 text = "Select Cat"
 
-[node name="Bling" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("7_sh4ma")
+[node name="MenuYes" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_a2wg1")
+
+[node name="MenuNo" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_ms1fs")
 
 [node name="StartGameTimer" type="Timer" parent="."]
 one_shot = true

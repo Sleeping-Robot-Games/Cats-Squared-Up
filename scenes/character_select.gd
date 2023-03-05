@@ -127,10 +127,16 @@ func press_focused(p):
 	# ready
 	var cat_num = cats[focus[p].x][focus[p].y].name.right(1)
 	if p == "p1":
+		if g.p2_cat == cat_num:
+			$MenuNo.play()
+			return
 		g.p1_cat = cat_num
 		$Players/CatP1.set_cat(cat_num)
 		$Players/CatP1.ready_up()
 	else:
+		if g.p1_cat == cat_num:
+			$MenuNo.play()
+			return
 		g.p2_cat = cat_num
 		$Players/CatP1.set_cat(cat_num)
 		$Players/CatP2.ready_up()
@@ -142,7 +148,7 @@ func press_focused(p):
 			cat.lock_in('p1')
 		elif ready_state['p2'] and cat.name.right(1) == g.p2_cat:
 			cat.lock_in('p2')
-	$Bling.play()
+	$MenuYes.play()
 	if ready_state['p1'] and ready_state['p2']:
 		$StartGameTimer.start()
 
