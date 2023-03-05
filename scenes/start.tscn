@@ -1,0 +1,66 @@
+[gd_scene load_steps=9 format=3 uid="uid://fgydhvyk61dg"]
+
+[ext_resource type="Script" path="res://scripts/menu.gd" id="1_l3n23"]
+[ext_resource type="FontFile" uid="uid://cfyq3y88px8p3" path="res://resources/04B_30__.TTF" id="2_6jcwx"]
+[ext_resource type="Texture2D" uid="uid://bxnbgra7vl5pa" path="res://assets/join_keys.png" id="5_8tp7r"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6dduv"]
+atlas = ExtResource("5_8tp7r")
+region = Rect2(0, 0, 96, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t6vyh"]
+atlas = ExtResource("5_8tp7r")
+region = Rect2(96, 0, 96, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w7esj"]
+atlas = ExtResource("5_8tp7r")
+region = Rect2(192, 0, 96, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7qti6"]
+atlas = ExtResource("5_8tp7r")
+region = Rect2(288, 0, 96, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nigqs"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6dduv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t6vyh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w7esj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7qti6")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Start" type="Node2D"]
+script = ExtResource("1_l3n23")
+
+[node name="Title" type="Label" parent="."]
+offset_left = 97.0
+offset_top = 68.0
+offset_right = 559.0
+offset_bottom = 108.0
+theme_override_fonts/font = ExtResource("2_6jcwx")
+theme_override_font_sizes/font_size = 36
+text = "Cats Squared Up"
+
+[node name="Join" type="Label" parent="."]
+offset_left = 206.0
+offset_top = 288.0
+offset_right = 472.0
+offset_bottom = 319.0
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 20
+text = "Press           or           to begin"
+
+[node name="JoinKeys" type="AnimatedSprite2D" parent="Join"]
+position = Vector2(120, 16)
+sprite_frames = SubResource("SpriteFrames_nigqs")

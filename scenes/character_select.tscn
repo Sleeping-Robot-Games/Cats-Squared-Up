@@ -1,8 +1,119 @@
-[gd_scene load_steps=4 format=3 uid="uid://bvcetonjrajlu"]
+[gd_scene load_steps=22 format=3 uid="uid://dwfkgrax7ebiw"]
 
 [ext_resource type="Script" path="res://scenes/character_select.gd" id="1_mcqvc"]
-[ext_resource type="PackedScene" uid="uid://dj70nt47n7w2" path="res://scenes/cat_button.tscn" id="2_u2bel"]
+[ext_resource type="PackedScene" uid="uid://dj2ev0w1whofn" path="res://scenes/cat_box.tscn" id="2_u2bel"]
 [ext_resource type="FontFile" uid="uid://cfyq3y88px8p3" path="res://resources/04B_30__.TTF" id="2_yr77d"]
+[ext_resource type="Texture2D" uid="uid://bxnbgra7vl5pa" path="res://assets/join_keys.png" id="4_yy71w"]
+[ext_resource type="Texture2D" uid="uid://ckhoyt447yvir" path="res://assets/enter_key.png" id="5_odd7q"]
+[ext_resource type="Texture2D" uid="uid://cqv8f44csujmv" path="res://assets/start_button.png" id="6_hj8mf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3vr5y"]
+atlas = ExtResource("4_yy71w")
+region = Rect2(0, 0, 96, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hu8ds"]
+atlas = ExtResource("4_yy71w")
+region = Rect2(96, 0, 96, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5p83h"]
+atlas = ExtResource("4_yy71w")
+region = Rect2(192, 0, 96, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xunsf"]
+atlas = ExtResource("4_yy71w")
+region = Rect2(288, 0, 96, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nx6pa"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3vr5y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hu8ds")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5p83h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xunsf")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xdlgk"]
+atlas = ExtResource("5_odd7q")
+region = Rect2(0, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hkset"]
+atlas = ExtResource("5_odd7q")
+region = Rect2(32, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_erq3m"]
+atlas = ExtResource("5_odd7q")
+region = Rect2(64, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cece8"]
+atlas = ExtResource("5_odd7q")
+region = Rect2(96, 0, 32, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_prw63"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xdlgk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hkset")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_erq3m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cece8")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2q45l"]
+atlas = ExtResource("6_hj8mf")
+region = Rect2(0, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nevj1"]
+atlas = ExtResource("6_hj8mf")
+region = Rect2(32, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gwjyo"]
+atlas = ExtResource("6_hj8mf")
+region = Rect2(64, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_md4c4"]
+atlas = ExtResource("6_hj8mf")
+region = Rect2(96, 0, 32, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yo373"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2q45l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nevj1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gwjyo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_md4c4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="CharacterSelect" type="Node2D"]
 script = ExtResource("1_mcqvc")
@@ -10,66 +121,171 @@ script = ExtResource("1_mcqvc")
 [node name="Cats" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+scale = Vector2(0.75, 0.75)
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
 [node name="Cat1" parent="Cats" instance=ExtResource("2_u2bel")]
 layout_mode = 0
-offset_left = 55.0
-offset_top = 86.0
-offset_right = 190.0
-offset_bottom = 213.0
+offset_left = 161.667
+offset_top = 107.333
+offset_right = 289.667
+offset_bottom = 251.333
 
 [node name="Cat2" parent="Cats" instance=ExtResource("2_u2bel")]
 layout_mode = 0
-offset_left = 190.0
-offset_top = 86.0
-offset_right = 325.0
-offset_bottom = 213.0
+offset_left = 296.667
+offset_top = 107.333
+offset_right = 424.667
+offset_bottom = 251.333
 
 [node name="Cat3" parent="Cats" instance=ExtResource("2_u2bel")]
 layout_mode = 0
-offset_left = 325.0
-offset_top = 86.0
-offset_right = 460.0
-offset_bottom = 213.0
+offset_left = 431.667
+offset_top = 107.333
+offset_right = 559.667
+offset_bottom = 251.333
 
 [node name="Cat4" parent="Cats" instance=ExtResource("2_u2bel")]
 layout_mode = 0
-offset_left = 460.0
-offset_top = 86.0
-offset_right = 595.0
-offset_bottom = 213.0
+offset_left = 566.667
+offset_top = 107.333
+offset_right = 694.667
+offset_bottom = 251.333
 
 [node name="Cat5" parent="Cats" instance=ExtResource("2_u2bel")]
 layout_mode = 0
-offset_left = 55.0
-offset_top = 213.0
-offset_right = 190.0
-offset_bottom = 340.0
+offset_left = 161.667
+offset_top = 258.333
+offset_right = 289.667
+offset_bottom = 402.333
 
 [node name="Cat6" parent="Cats" instance=ExtResource("2_u2bel")]
 layout_mode = 0
-offset_left = 190.0
-offset_top = 213.0
-offset_right = 325.0
-offset_bottom = 340.0
+offset_left = 296.667
+offset_top = 258.333
+offset_right = 424.667
+offset_bottom = 402.333
 
 [node name="Cat7" parent="Cats" instance=ExtResource("2_u2bel")]
 layout_mode = 0
-offset_left = 325.0
-offset_top = 213.0
-offset_right = 460.0
-offset_bottom = 340.0
+offset_left = 431.667
+offset_top = 258.333
+offset_right = 559.667
+offset_bottom = 402.333
 
 [node name="Cat8" parent="Cats" instance=ExtResource("2_u2bel")]
 layout_mode = 0
-offset_left = 460.0
-offset_top = 213.0
-offset_right = 595.0
-offset_bottom = 340.0
+offset_left = 566.667
+offset_top = 258.333
+offset_right = 694.667
+offset_bottom = 402.333
 
-[node name="Label" type="Label" parent="."]
+[node name="Players" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_top = -14.0
+offset_right = 40.0
+offset_bottom = 26.0
+scale = Vector2(0.75, 0.75)
+
+[node name="P1" type="Label" parent="Players"]
+modulate = Color(0.301961, 0.137255, 0.290196, 1)
+layout_mode = 0
+offset_left = 165.0
+offset_top = 440.0
+offset_right = 294.0
+offset_bottom = 480.0
+theme_override_fonts/font = ExtResource("2_yr77d")
+theme_override_font_sizes/font_size = 36
+text = "P1"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="VS" type="Label" parent="Players"]
+layout_mode = 0
+offset_left = 372.0
+offset_top = 544.0
+offset_right = 501.0
+offset_bottom = 584.0
+theme_override_fonts/font = ExtResource("2_yr77d")
+theme_override_font_sizes/font_size = 36
+text = "VS"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="P2" type="Label" parent="Players"]
+layout_mode = 0
+offset_left = 570.001
+offset_top = 440.0
+offset_right = 699.001
+offset_bottom = 480.0
+theme_override_fonts/font = ExtResource("2_yr77d")
+theme_override_font_sizes/font_size = 36
+text = "CPU"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="CatP1" parent="Players" instance=ExtResource("2_u2bel")]
+layout_mode = 0
+offset_left = 161.667
+offset_top = 480.0
+offset_right = 289.667
+offset_bottom = 624.0
+
+[node name="CatP2" parent="Players" instance=ExtResource("2_u2bel")]
+layout_mode = 0
+offset_left = 567.334
+offset_top = 480.0
+offset_right = 702.334
+offset_bottom = 607.0
+
+[node name="JoinBoth" type="Label" parent="Players/CatP2"]
+visible = false
+layout_mode = 0
+offset_left = 1.00006
+offset_top = 145.0
+offset_right = 138.0
+offset_bottom = 176.0
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 20
+text = "P2 Join        or"
+
+[node name="Both" type="AnimatedSprite2D" parent="Players/CatP2/JoinBoth"]
+position = Vector2(121.333, 16)
+sprite_frames = SubResource("SpriteFrames_nx6pa")
+
+[node name="JoinKeyboard" type="Label" parent="Players/CatP2"]
+visible = false
+layout_mode = 0
+offset_left = 1.00006
+offset_top = 145.0
+offset_right = 138.0
+offset_bottom = 176.0
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 20
+text = "P2 Join"
+
+[node name="Enter" type="AnimatedSprite2D" parent="Players/CatP2/JoinKeyboard"]
+position = Vector2(121.333, 16)
+sprite_frames = SubResource("SpriteFrames_prw63")
+
+[node name="JoinJoypad" type="Label" parent="Players/CatP2"]
+visible = false
+layout_mode = 0
+offset_left = 1.00006
+offset_top = 145.0
+offset_right = 138.0
+offset_bottom = 176.0
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 20
+text = "P2 Join"
+
+[node name="Start" type="AnimatedSprite2D" parent="Players/CatP2/JoinJoypad"]
+position = Vector2(121.333, 16)
+sprite_frames = SubResource("SpriteFrames_yo373")
+
+[node name="SelectCat" type="Label" parent="."]
 offset_left = 171.0
 offset_top = 23.0
 offset_right = 477.0
@@ -77,12 +293,3 @@ offset_bottom = 63.0
 theme_override_fonts/font = ExtResource("2_yr77d")
 theme_override_font_sizes/font_size = 36
 text = "Select Cat"
-
-[node name="Fight" type="Button" parent="."]
-offset_left = 240.0
-offset_top = 384.0
-offset_right = 404.0
-offset_bottom = 440.0
-text = "FIGHT"
-
-[connection signal="button_up" from="Fight" to="." method="_on_fight_button_up"]
