@@ -172,8 +172,9 @@ joypad_submit={
 
 [layer_names]
 
-2d_physics/layer_1="cat"
-2d_physics/layer_2="floor"
+2d_physics/layer_1="p1"
+2d_physics/layer_2="p2"
+2d_physics/layer_3="floor"
 
 [rendering]
 

@@ -10,14 +10,26 @@ var is_flipped: bool = false
 var input_buffer: Array = []
 var input_window: float = 0.1
 var time: float = input_window
+var hp: int = 100
+var hit_enemies: Array = []
 
 const JUMP_SPEED: float = 200.0
 const FALL_SPEED: float = 200.0
 const MOVE_SPEED: float = 200.0
+const BASE_DMG: int = 5
 
 @onready var state_machine = $AnimationTree.get('parameters/playback')
 
 var common_moves: Dictionary = g.moves['common']
+
+func _ready():
+	var is_p1 = player == 'p1'
+	set_collision_layer_value(1, is_p1)
+	set_collision_layer_value(2, !is_p1)
+	$HitArea.set_collision_layer_value(1, is_p1)
+	$HitArea.set_collision_layer_value(2, !is_p1)
+	$HitArea.set_collision_mask_value(1, is_p1)
+	$HitArea.set_collision_mask_value(2, !is_p1)
 
 func _input(event):
 	if not correct_input(event):
@@ -55,36 +67,28 @@ func _input(event):
 		var walk_left = 'walk_forward' if is_flipped else 'walk_backward'
 		var walk_right = 'walk_backward' if is_flipped else 'walk_forward'
 		if is_moving_left and (state == 'idle' or walk_right):
-			print('a')
 			var anim = walk_left
 			state_machine.travel(anim)
 		elif is_moving_right and (state == 'idle' or walk_left):
-			print('b')
 			var anim = walk_right
 			state_machine.travel(anim)
 		elif !is_moving_left and state == walk_left:
-			print('c ' + state)
 			state_machine.travel('idle')
 		elif !is_moving_right and state == walk_right:
-			print('d')
 			state_machine.travel('idle')
 		elif event.is_action_pressed('keyboard_up') \
 		or event.is_action_pressed('joypad_up'):
-			print('e')
 			state_machine.travel('jump')
 		elif event.is_action_pressed('keyboard_down') \
 		or event.is_action_pressed('joypad_down'):
-			print('f')
 			is_crouching = true
 			state_machine.travel('crouch_idle')
 		elif event.is_action_released('keyboard_down') \
 		or event.is_action_released('joypad_down'):
-			print('g')
 			is_crouching = false
 			state_machine.travel('idle')
 		elif event.is_action_pressed('keyboard_smash') \
 		or event.is_action_pressed('joypad_smash'):
-			print('h')
 			state_machine.travel('cat_smash')
 
 func correct_input(event) -> bool:
@@ -156,3 +160,19 @@ func attempt_combo(combo: Array = []):
 		else:
 			state_machine.travel('straight_kick')
 			return
+
+func dmg(num):
+	hp -= num
+	if hp <= 0:
+		hp = 0
+		# TODO death / lose
+	print(player + ' hp: ' + str(hp))
+
+func _on_hit_area_body_entered(body):
+	if !hit_enemies.has(body) and body.has_method('dmg'):
+		hit_enemies.append(body)
+		body.dmg(BASE_DMG)
+
+func _on_hit_area_body_exited(body):
+	if hit_enemies.has(body):
+		hit_enemies.erase(body)
