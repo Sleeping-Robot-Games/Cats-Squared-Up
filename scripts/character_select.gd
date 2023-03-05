@@ -20,6 +20,7 @@ func _ready():
 	$Players/CatP1.set_cat('1')
 	$Players/CatP1.select('p1_no_label')
 	$Players/CatP2.set_cat('random')
+	$Players/CatP2.select('p2_no_label')
 	$Players/CatP2.ready_up()
 	if g.player_input_devices['p1'] == 'keyboard':
 		$Players/CatP2/JoinJoypad.visible = true
