@@ -62,7 +62,6 @@ func _input(event):
 		is_moving_right = false
 	# walk / idle / jump / crouch / smash
 	if is_on_floor():
-		print('on floor')
 		var state = state_machine.get_current_node()
 		var walk_left = 'walk_forward' if is_flipped else 'walk_backward'
 		var walk_right = 'walk_backward' if is_flipped else 'walk_forward'
@@ -161,7 +160,13 @@ func attempt_combo(combo: Array = []):
 			state_machine.travel('straight_kick')
 			return
 
-func dmg(num):
+# height = 'low' | 'mid' | 'high'
+func dmg(num: int, height: String = 'mid'):
+	var state = state_machine.get_current_node()
+	if state == 'walk_backward' and height == 'mid':
+		state_machine.travel('straight_block')
+		print('blocked')
+		return
 	hp -= num
 	if hp <= 0:
 		hp = 0
