@@ -23,6 +23,7 @@ g="*res://scripts/global.gd"
 
 window/size/viewport_width=640
 window/size/viewport_height=480
+window/stretch/mode="viewport"
 
 [importer_defaults]
 

@@ -126,11 +126,16 @@ func _process(delta: float):
 
 func face_opponent():
 	var opponent = 'p2' if player == 'p1' else 'p1'
-	is_flipped = g.players[player].global_position.x > g.players[opponent].global_position.x
-	scale.x = -1 if is_flipped else 1
-	print(player + ' scale.x: ' + str(scale.x) + ' is_flipped:' + str(is_flipped))
+	var distance_to_opponent = g.players[opponent].global_position.x - g.players[player].global_position.x
+	if distance_to_opponent > 20:
+		scale.x = scale.y * 1
+		is_flipped = false
+	elif distance_to_opponent < -20:
+		scale.x = scale.y * -1
+		is_flipped = true
 
 func process_state(state: String):
+	print(state)
 	if state == 'jump' and is_on_floor():
 		is_jumping = true
 	elif state == 'jump_punch' or state == 'jump_kick':
