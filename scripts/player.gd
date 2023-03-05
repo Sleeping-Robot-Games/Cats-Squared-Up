@@ -28,8 +28,8 @@ func _ready():
 	set_collision_layer_value(2, !is_p1)
 	$HitArea.set_collision_layer_value(1, is_p1)
 	$HitArea.set_collision_layer_value(2, !is_p1)
-	$HitArea.set_collision_mask_value(1, is_p1)
-	$HitArea.set_collision_mask_value(2, !is_p1)
+	$HitArea.set_collision_mask_value(1, !is_p1)
+	$HitArea.set_collision_mask_value(2, is_p1)
 
 func _input(event):
 	if not correct_input(event):
