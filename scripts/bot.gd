@@ -84,6 +84,7 @@ func return_random_value():
 func move_ai():
 	velocity = Vector2()
 	velocity.x += move_dir * ai_movement_speed
+	state_machine.travel('walk_forward')
 	move_and_slide()
 
 func set_crouch_state(input):

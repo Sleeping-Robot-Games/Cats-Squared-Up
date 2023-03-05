@@ -135,7 +135,6 @@ func face_opponent():
 		is_flipped = true
 
 func process_state(state: String):
-	print(state)
 	if state == 'jump' and is_on_floor():
 		is_jumping = true
 	elif state == 'jump_punch' or state == 'jump_kick':
