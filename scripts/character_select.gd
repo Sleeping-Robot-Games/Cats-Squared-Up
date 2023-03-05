@@ -56,7 +56,6 @@ func _input(event):
 		$Players/CatP2/JoinKeyboard.visible = false
 		$Players/CatP2/JoinJoypad.visible = false
 		$Players/P2.text = 'P2'
-		$Players/P2.modulate = Color('#D4715D')
 		get_node('Cats/Cat'+g.p2_cat).select('p2')
 		ready_state['p2'] = false
 		return
