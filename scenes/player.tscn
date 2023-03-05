@@ -1224,7 +1224,7 @@ states/jump/position = Vector2(347, 10)
 states/straight_punch/node = SubResource("AnimationNodeAnimation_1jpap")
 states/straight_punch/position = Vector2(658, 100)
 transitions = ["idle", "straight_punch", SubResource("AnimationNodeStateMachineTransition_eabq1"), "straight_punch", "idle", SubResource("AnimationNodeStateMachineTransition_s34s3"), "idle", "crouch", SubResource("AnimationNodeStateMachineTransition_820kq"), "crouch", "idle", SubResource("AnimationNodeStateMachineTransition_iuemm"), "crouch", "crouch_punch", SubResource("AnimationNodeStateMachineTransition_nd04k"), "crouch_punch", "crouch", SubResource("AnimationNodeStateMachineTransition_tpitu"), "crouch_punch", "idle", SubResource("AnimationNodeStateMachineTransition_merjj"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_qmwty"), "idle", "crouch_punch", SubResource("AnimationNodeStateMachineTransition_wvwq2"), "idle", "jump", SubResource("AnimationNodeStateMachineTransition_pac8t"), "jump", "fall", SubResource("AnimationNodeStateMachineTransition_r7ps6"), "fall", "idle", SubResource("AnimationNodeStateMachineTransition_lunn2")]
-graph_offset = Vector2(48, -19)
+graph_offset = Vector2(48, 108.719)
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_0xhtv"]
 

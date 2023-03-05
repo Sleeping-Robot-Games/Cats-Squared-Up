@@ -5,7 +5,7 @@ var p2_cat: String = 'random'
 
 var player_input_devices: Dictionary = {
 	'p1': 'keyboard',
-	'p2': 'cpu',
+	'p2': 'bot',
 }
 
 # physical input duplicate entries
