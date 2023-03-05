@@ -13,3 +13,6 @@ func _ready():
 	g.players['p2'].global_position = $P2Spawn.global_position
 	g.players['p2'].player = 'p2'
 	add_child(g.players['p2'])
+
+func change_hp_bar(player: String, new_hp):
+	get_node("CanvasLayer/"+player+"ProgressBar").value = new_hp

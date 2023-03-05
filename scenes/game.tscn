@@ -283,3 +283,19 @@ position = Vector2(125, 400)
 
 [node name="P2Spawn" type="Marker2D" parent="."]
 position = Vector2(535, 400)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="p1ProgressBar" type="ProgressBar" parent="CanvasLayer"]
+offset_left = 20.0
+offset_top = 15.0
+offset_right = 199.0
+offset_bottom = 42.0
+value = 100.0
+
+[node name="p2ProgressBar" type="ProgressBar" parent="CanvasLayer"]
+offset_left = 433.0
+offset_top = 16.0
+offset_right = 612.0
+offset_bottom = 43.0
+value = 100.0

@@ -1,6 +1,5 @@
 extends CharacterBody2D
 
-## TODO: inherit from same base scene/script as player, override input w/ AI
 var generator = RandomNumberGenerator.new()
 
 var player = 'p2'
@@ -16,10 +15,15 @@ var countdown: float = max_time_till_choice # Current time until next choice
 var m_keys = ['straight_punch', 'straight_kick', 'cat_smash']
 var start_moving = false # check if AI is allowed to move
 var is_crouching = false # check if the AI isn't crouching
-var is_attacking = false
+var is_attacking = false # check if AI is attacking
+
+var hp: int = 100
+var hit_enemies: Array = []
+const BASE_DMG: int = 5
 
 @onready var state_machine = $AnimationTree.get('parameters/playback')
 @onready var player_node = get_parent().get_node("Player")
+@onready var game = get_parent()
 
 func _ready():
 	var is_p1 = player == 'p1'
@@ -94,3 +98,28 @@ func set_attack_state(input):
 	is_attacking = input
 	z_index = 1
 	player_node.z_index = 0
+
+# height = 'low' | 'mid' | 'high'
+func dmg(num: int, height: String = 'mid'):
+	print('damaged')
+	print(num)
+	var state = state_machine.get_current_node()
+	if state == 'walk_backward' and height == 'mid':
+		state_machine.travel('straight_block')
+		print('blocked')
+		return
+	hp -= num
+	if hp <= 0:
+		hp = 0
+		# TODO death / lose
+	game.change_hp_bar(player, hp)
+	print(player + ' hp: ' + str(hp))
+
+func _on_hit_area_body_entered(body):
+	if !hit_enemies.has(body) and body.has_method('dmg'):
+		hit_enemies.append(body)
+		body.dmg(BASE_DMG)
+
+func _on_hit_area_body_exited(body):
+	if hit_enemies.has(body):
+		hit_enemies.erase(body)

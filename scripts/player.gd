@@ -18,6 +18,7 @@ const FALL_SPEED: float = 200.0
 const MOVE_SPEED: float = 200.0
 const BASE_DMG: int = 5
 
+@onready var game = get_parent()
 @onready var state_machine = $AnimationTree.get('parameters/playback')
 
 var common_moves: Dictionary = g.moves['common']
@@ -172,6 +173,8 @@ func attempt_combo(combo: Array = []):
 
 # height = 'low' | 'mid' | 'high'
 func dmg(num: int, height: String = 'mid'):
+	print('damaged')
+	print(num)
 	var state = state_machine.get_current_node()
 	if state == 'walk_backward' and height == 'mid':
 		state_machine.travel('straight_block')
@@ -181,6 +184,7 @@ func dmg(num: int, height: String = 'mid'):
 	if hp <= 0:
 		hp = 0
 		# TODO death / lose
+	game.change_hp_bar(player, hp)
 	print(player + ' hp: ' + str(hp))
 
 func _on_hit_area_body_entered(body):
