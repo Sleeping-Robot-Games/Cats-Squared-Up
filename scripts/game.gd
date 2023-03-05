@@ -23,7 +23,7 @@ func _ready():
 	p2Box.select('p2_no_label')
 	if g.p2_cat == 'random':
 		var rng = RandomNumberGenerator.new()
-		g.p2_cat = str(rng.randi_range(1, 6))
+		g.p2_cat = str(rng.randi_range(1, 3)) # TODO: increase as other cats are unlocked
 	p2Box.set_cat(g.p2_cat)
 	# TODO: set p2 cat sprite
 

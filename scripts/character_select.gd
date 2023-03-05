@@ -15,6 +15,9 @@ var focus: Dictionary = {
 func _ready():
 	for cat in $Cats.get_children():
 		cat.set_cat(cat.name.right(1))
+	# lock second row of cats for now
+	for cat in cats[1]:
+		cat.lock()
 	$Cats/Cat1.select('p1')
 	
 	$Players/CatP1.set_cat('1')
@@ -123,16 +126,28 @@ func focus_changed():
 	else:
 		cats[focus['p1'].x][focus['p1'].y].select('p1')
 		cats[focus['p2'].x][focus['p2'].y].select('p2')
-	# update bottom avatars if not locked in
+	# update bottom avatars if cat hasn't been chosen yet
+	$Players/CatP1.unlock()
+	$Players/CatP2.unlock()
 	if !ready_state['p1']:
-		var cat_num = cats[focus['p1'].x][focus['p1'].y].name.right(1)
+		var cat = cats[focus['p1'].x][focus['p1'].y]
+		var cat_num = cat.name.right(1)
 		$Players/CatP1.set_cat(cat_num)
+		if cat.is_locked:
+			$Players/CatP1.lock()
 	if g.player_input_devices['p2'] != 'bot' and !ready_state['p2']:
-		var cat_num = cats[focus['p2'].x][focus['p2'].y].name.right(1)
+		var cat = cats[focus['p2'].x][focus['p2'].y]
+		var cat_num = cat.name.right(1)
 		$Players/CatP2.set_cat(cat_num)
+		if cat.is_locked:
+			$Players/CatP2.lock()
 		
 
 func press_focused(p):
+	# reject if locked
+	if cats[focus[p].x][focus[p].y].is_locked:
+		$MenuNo.play()
+		return
 	# ready
 	var cat_num = cats[focus[p].x][focus[p].y].name.right(1)
 	if p == 'p1':
@@ -150,13 +165,13 @@ func press_focused(p):
 		$Players/CatP2.set_cat(cat_num)
 		$Players/CatP2.ready_up()
 	ready_state[p] = true
-	# locked in
+	# choose
 	for cat in $Cats.get_children():
-		cat.unlock()		
+		cat.unchoose()
 		if ready_state['p1'] and cat.name.right(1) == g.p1_cat:
-			cat.lock_in('p1')
+			cat.choose('p1')
 		elif ready_state['p2'] and cat.name.right(1) == g.p2_cat:
-			cat.lock_in('p2')
+			cat.choose('p2')
 	$MenuYes.play()
 	if ready_state['p1'] and ready_state['p2']:
 		$StartGameTimer.start()

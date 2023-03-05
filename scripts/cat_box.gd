@@ -1,6 +1,7 @@
 extends Control
 
 var cat: String = '1'
+var is_locked: bool = false
 
 func set_cat(new_cat: String):
 	cat = new_cat
@@ -29,15 +30,23 @@ func select(state: String):
 	elif state == 'both':
 		$Both.visible = true
 
-func lock_in(player: String):
+func choose(player: String):
 	if player == 'p1':
-		$P1Locked.visible = true
+		$P1Chosen.visible = true
 	else:
-		$P2Locked.visible = true
+		$P2Chosen.visible = true
+
+func unchoose():
+	$P1Chosen.visible = false
+	$P2Chosen.visible = false
+
+func lock():
+	is_locked = true
+	$Locked.visible = true
 
 func unlock():
-	$P1Locked.visible = false
-	$P2Locked.visible = false
+	is_locked = false
+	$Locked.visible = false
 
 func ready_up():
 	$Ready.visible = true
