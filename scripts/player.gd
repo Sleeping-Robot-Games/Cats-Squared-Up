@@ -16,6 +16,7 @@ var hit_enemies: Array = []
 const JUMP_SPEED: float = 200.0
 const FALL_SPEED: float = 200.0
 const MOVE_SPEED: float = 200.0
+const HIT_SPEED: float = 200.0
 const BASE_DMG: int = 5
 
 @onready var game = get_parent()
@@ -102,8 +103,9 @@ func correct_input(event) -> bool:
 	return false
 
 func _process(delta: float):
+	var state = state_machine.get_current_node()
 	face_opponent()
-	process_state(state_machine.get_current_node())
+	process_state(state)
 	if(input_buffer.size() > 0):
 		time -= delta
 		if(time < 0):
@@ -113,10 +115,18 @@ func _process(delta: float):
 			return
 	# apply velocity
 	velocity = Vector2.ZERO
-	if is_moving_left:
+	if state == 'crouch_hit':
+		velocity.x += (HIT_SPEED / 2) if is_flipped else (HIT_SPEED / 2) * -1
+	elif state == 'straight_hit':
+		velocity.x += HIT_SPEED if is_flipped else HIT_SPEED * -1
+	elif state == 'jump_hit':
+		velocity.x += HIT_SPEED if is_flipped else HIT_SPEED * -1
+		velocity.y -= HIT_SPEED if is_flipped else HIT_SPEED * -1
+	elif is_moving_left:
 		velocity.x -= MOVE_SPEED
 	elif is_moving_right:
 		velocity.x += MOVE_SPEED
+	# vertical
 	if is_jumping:
 		velocity.y -= JUMP_SPEED
 	elif is_floating:
@@ -180,12 +190,18 @@ func dmg(num: int, height: String = 'mid'):
 		state_machine.travel('straight_block')
 		print('blocked')
 		return
+	if is_on_floor():
+		if is_crouching:
+			state_machine.travel('crouch_hit')
+		else:
+			state_machine.travel('straight_hit')
+	else:
+		state_machine.travel('jump_hit')
 	hp -= num
 	if hp <= 0:
 		hp = 0
 		# TODO death / lose
 	game.change_hp_bar(player, hp)
-	print(player + ' hp: ' + str(hp))
 
 func _on_hit_area_body_entered(body):
 	if !hit_enemies.has(body) and body.has_method('dmg'):
