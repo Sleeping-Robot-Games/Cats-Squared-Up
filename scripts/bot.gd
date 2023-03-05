@@ -20,6 +20,7 @@ var is_attacking = false # check if AI is attacking
 var hp: int = 100
 var hit_enemies: Array = []
 const BASE_DMG: int = 5
+const FALL_SPEED: float = 200.0
 const HIT_SPEED: float = 200.0
 
 @onready var state_machine = $AnimationTree.get('parameters/playback')
@@ -54,9 +55,21 @@ func _process(delta):
 		move_and_slide()
 		return
 	
+	# TODO
+	# vertical
+	#if is_jumping:
+	#	velocity.y -= JUMP_SPEED
+	#elif is_floating:
+	#	velocity.y += FALL_SPEED / 2
+	#else:
+	#	velocity.y += FALL_SPEED
+	if !is_on_floor():
+		velocity.y += FALL_SPEED
+		move_and_slide()
+	
 	if(!is_attacking && countdown < 0):
 		choose_action()
-
+	
 	# Start moving
 	if(start_moving && time > 0 && !is_crouching):
 		move_ai()
