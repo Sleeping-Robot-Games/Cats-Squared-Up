@@ -1,12 +1,12 @@
 extends Node2D
 
 var ready_state: Dictionary = {
-	"p1": false,
-	"p2": true
+	'p1': false,
+	'p2': true
 }
 var focus: Dictionary = {
-	"p1": Vector2(0,0),
-	"p2": Vector2(0,3)
+	'p1': Vector2(0,0),
+	'p2': Vector2(0,3)
 }
 @onready var cats: Array = [
 	[$Cats/Cat1, $Cats/Cat2, $Cats/Cat3, $Cats/Cat4],
@@ -15,11 +15,11 @@ var focus: Dictionary = {
 func _ready():
 	for cat in $Cats.get_children():
 		cat.set_cat(cat.name.right(1))
-	$Cats/Cat1.select("p1")
+	$Cats/Cat1.select('p1')
 	
-	$Players/CatP1.set_cat("1")
-	$Players/CatP1.select("p1_no_label")
-	$Players/CatP2.set_cat("random")
+	$Players/CatP1.set_cat('1')
+	$Players/CatP1.select('p1_no_label')
+	$Players/CatP2.set_cat('random')
 	$Players/CatP2.ready_up()
 	if g.player_input_devices['p1'] == 'keyboard':
 		$Players/CatP2/JoinJoypad.visible = true
@@ -31,13 +31,13 @@ func _ready():
 func _input(event):
 	# p2 join
 	var p2_joined = false
-	if g.p2_cat == "cpu":
-		if g.player_input_devices['p1'] != "keyboard" \
-		and event is InputEvent and event.is_action_pressed("keyboard_submit"):
+	if g.player_input_devices['p2'] == 'cpu':
+		if g.player_input_devices['p1'] != 'keyboard' \
+		and event is InputEvent and event.is_action_pressed('keyboard_submit'):
 			g.player_input_devices['p2'] = 'keyboard'
 			p2_joined = true
-		elif g.player_input_devices['p1'] == "keyboard" \
-		and event is InputEventJoypadButton and event.is_action_pressed("joypad_submit"):
+		elif g.player_input_devices['p1'] == 'keyboard' \
+		and event is InputEventJoypadButton and event.is_action_pressed('joypad_submit'):
 			var device_name: String = Input.get_joy_name(event.device)
 			if g.ghost_inputs.has(device_name):
 				return
@@ -51,14 +51,14 @@ func _input(event):
 		$Players/CatP2/JoinBoth.visible = false
 		$Players/CatP2/JoinKeyboard.visible = false
 		$Players/CatP2/JoinJoypad.visible = false
-		$Players/P2.text = "P2"
-		$Players/P2.modulate = Color("#D4715D")
+		$Players/P2.text = 'P2'
+		$Players/P2.modulate = Color('#D4715D')
 		$Cats/Cat4.select('p2')
 		ready_state['p2'] = false
 		return
 	# focus change
 	var players: Array = ['p1']
-	if g.p2_cat != 'cpu':
+	if g.player_input_devices['p2'] != 'cpu':
 		players.append('p2')
 	for p in players:
 		if event is InputEvent and g.player_input_devices[p] == 'keyboard':
@@ -70,8 +70,8 @@ func _input(event):
 				focus_prev_column(p)
 			elif event.is_action_pressed('keyboard_right'):
 				focus_next_column(p)
-			elif event.is_action_pressed("keyboard_select") \
-			or event.is_action_pressed("keyboard_submit"):
+			elif event.is_action_pressed('keyboard_select') \
+			or event.is_action_pressed('keyboard_submit'):
 				press_focused(p)
 		elif event is InputEventJoypadButton \
 		and g.player_input_devices[p] == 'joypad_' + str(event.device) \
@@ -84,8 +84,8 @@ func _input(event):
 				focus_prev_column(p)
 			elif event.is_action_pressed('joypad_right'):
 				focus_next_column(p)
-			elif event.is_action_pressed("joypad_select") \
-			or event.is_action_pressed("joypad_submit"):
+			elif event.is_action_pressed('joypad_select') \
+			or event.is_action_pressed('joypad_submit'):
 				press_focused(p)
 
 func focus_prev_row(player: String = 'p1'):
@@ -115,7 +115,7 @@ func focus_next_column(player: String = 'p1'):
 func focus_changed():
 	for cat in $Cats.get_children():
 		cat.select('none')
-	if g.p2_cat == 'cpu':
+	if g.player_input_devices['p2'] == 'cpu':
 		cats[focus['p1'].x][focus['p1'].y].select('p1')
 	elif focus['p1'] == focus['p2']:
 		cats[focus['p1'].x][focus['p1'].y].select('both')
@@ -126,7 +126,7 @@ func focus_changed():
 func press_focused(p):
 	# ready
 	var cat_num = cats[focus[p].x][focus[p].y].name.right(1)
-	if p == "p1":
+	if p == 'p1':
 		if g.p2_cat == cat_num:
 			$MenuNo.play()
 			return

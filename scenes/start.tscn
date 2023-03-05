@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/start.gd" id="1_yghs3"]
 [ext_resource type="FontFile" uid="uid://cfyq3y88px8p3" path="res://resources/04B_30__.TTF" id="2_6jcwx"]
-[ext_resource type="AudioStream" uid="uid://cg1pwstmn5ny7" path="res://assets/sfx/menu_yes.mp3" id="4_mc5ll"]
+[ext_resource type="AudioStream" uid="uid://ca0ynkwnp1hwy" path="res://assets/sfx/meow.mp3" id="4_tegb7"]
 [ext_resource type="Texture2D" uid="uid://bxnbgra7vl5pa" path="res://assets/join_keys.png" id="5_8tp7r"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6dduv"]
@@ -53,24 +53,27 @@ theme_override_fonts/font = ExtResource("2_6jcwx")
 theme_override_font_sizes/font_size = 36
 text = "Cats Squared Up"
 
-[node name="Join" type="Label" parent="."]
-offset_left = 206.0
-offset_top = 288.0
-offset_right = 472.0
-offset_bottom = 319.0
-size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 20
-text = "Press           or           to begin"
+[node name="Or" type="Label" parent="."]
+offset_left = 285.0
+offset_top = 238.0
+offset_right = 353.0
+offset_bottom = 278.0
+theme_override_fonts/font = ExtResource("2_6jcwx")
+theme_override_font_sizes/font_size = 26
+text = "or"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="JoinKeys" type="AnimatedSprite2D" parent="Join"]
-position = Vector2(120, 16)
+[node name="JoinKeys" type="AnimatedSprite2D" parent="."]
+position = Vector2(318, 254)
+scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_nigqs")
 
-[node name="MenuYes" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_mc5ll")
+[node name="Meow" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_tegb7")
 
 [node name="CatSelectTimer" type="Timer" parent="."]
-wait_time = 0.22
+wait_time = 1.5
 one_shot = true
 
 [connection signal="timeout" from="CatSelectTimer" to="." method="_on_cat_select_timer_timeout"]

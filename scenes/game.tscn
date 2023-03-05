@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://bv6dkookh5tfv"]
 
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_inhho"]
 [ext_resource type="Texture2D" uid="uid://b4fjf04qbr4kt" path="res://assets/stage.png" id="1_wohj2"]
-[ext_resource type="PackedScene" uid="uid://d00gn2tfiviml" path="res://scenes/player.tscn" id="1_y2vc3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kegop"]
 texture = ExtResource("1_wohj2")
@@ -249,6 +249,7 @@ tile_size = Vector2i(32, 32)
 sources/0 = SubResource("TileSetAtlasSource_kmxbk")
 
 [node name="Game" type="Node2D"]
+script = ExtResource("1_inhho")
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_qbpwa")
@@ -261,7 +262,8 @@ tile_set = SubResource("TileSet_cbvw8")
 format = 2
 layer_0/tile_data = PackedInt32Array(327690, 262144, 2, 393226, 262144, 3, 327691, 327680, 2, 393227, 327680, 3, 262154, 262144, 1, 262155, 327680, 1, 327679, 262144, 1, 393215, 262144, 2, 458751, 262144, 3, 262144, 262144, 1, 327680, 262144, 2, 393216, 262144, 3, 327678, 262144, 1, 393214, 262144, 2, 458750, 262144, 3, 262146, 393216, 1, 327682, 393216, 2, 393218, 393216, 3, 262145, 262144, 1, 327681, 262144, 2, 262147, 327680, 0, 393219, 327680, 0, 393217, 262144, 3)
 
-[node name="Player" parent="." instance=ExtResource("1_y2vc3")]
-position = Vector2(90, 355)
-scale = Vector2(3, 3)
-collision_mask = 3
+[node name="P1Spawn" type="Marker2D" parent="."]
+position = Vector2(90, 300)
+
+[node name="P2Spawn" type="Marker2D" parent="."]
+position = Vector2(500, 300)
