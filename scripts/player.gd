@@ -33,7 +33,7 @@ func _input(event):
 		time = input_window
 		input_buffer.append('kick')
 		return
-	# jump / crouch / idle
+	# jump / crouch / idle / smash
 	if is_on_floor():
 		if event.is_action_pressed('keyboard_up') \
 		or event.is_action_pressed('joypad_up'):
@@ -46,6 +46,9 @@ func _input(event):
 		or event.is_action_released('joypad_down'):
 			is_crouching = false
 			state_machine.travel('idle')
+		elif event.is_action_pressed('keyboard_smash') \
+		or event.is_action_pressed('joypad_smash'):
+			state_machine.travel('cat_smash')
 	# moving left
 	if event.is_action_pressed('keyboard_left') \
 	or event.is_action_pressed('joypad_left'):
