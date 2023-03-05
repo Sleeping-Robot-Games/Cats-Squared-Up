@@ -9,8 +9,8 @@ var focus: Dictionary = {
 	'p2': Vector2(0,3)
 }
 @onready var cats: Array = [
-	[$Cats/Cat1, $Cats/Cat2, $Cats/Cat3, $Cats/Cat4],
-	[$Cats/Cat5, $Cats/Cat6, $Cats/Cat7, $Cats/Cat8]]
+	[$Cats/Cat1, $Cats/Cat2, $Cats/Cat3],
+	[$Cats/Cat4, $Cats/Cat5, $Cats/Cat6]]
 
 func _ready():
 	for cat in $Cats.get_children():
