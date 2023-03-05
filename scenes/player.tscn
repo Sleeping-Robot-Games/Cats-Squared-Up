@@ -1480,10 +1480,8 @@ collision_layer = 0
 collision_mask = 4
 
 [node name="HitCollider" type="CollisionShape2D" parent="HitArea"]
-visible = false
 position = Vector2(10, 8)
 shape = SubResource("RectangleShape2D_rqfxp")
-disabled = true
 
 [node name="BodyCollider" type="CollisionShape2D" parent="."]
 position = Vector2(0, 8)
