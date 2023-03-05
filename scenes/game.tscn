@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://bv6dkookh5tfv"]
+[gd_scene load_steps=11 format=3 uid="uid://bv6dkookh5tfv"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_inhho"]
 [ext_resource type="Texture2D" uid="uid://b4fjf04qbr4kt" path="res://assets/stage.png" id="1_wohj2"]
 [ext_resource type="PackedScene" uid="uid://cjmicnf4i03og" path="res://scenes/tuna.tscn" id="3_fv0dy"]
+[ext_resource type="PackedScene" uid="uid://dj2ev0w1whofn" path="res://scenes/cat_box.tscn" id="4_c5que"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kegop"]
 texture = ExtResource("1_wohj2")
@@ -284,18 +285,28 @@ position = Vector2(125, 400)
 [node name="P2Spawn" type="Marker2D" parent="."]
 position = Vector2(535, 400)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="HUD" type="CanvasLayer" parent="."]
 
-[node name="p1ProgressBar" type="ProgressBar" parent="CanvasLayer"]
-offset_left = 20.0
+[node name="p1ProgressBar" type="ProgressBar" parent="HUD"]
+offset_left = 100.0
 offset_top = 15.0
-offset_right = 199.0
+offset_right = 279.0
 offset_bottom = 42.0
 value = 100.0
 
-[node name="p2ProgressBar" type="ProgressBar" parent="CanvasLayer"]
-offset_left = 433.0
+[node name="p2ProgressBar" type="ProgressBar" parent="HUD"]
+offset_left = 353.0
 offset_top = 16.0
-offset_right = 612.0
+offset_right = 532.0
 offset_bottom = 43.0
 value = 100.0
+
+[node name="p1Box" parent="HUD" instance=ExtResource("4_c5que")]
+offset_left = 16.0
+offset_right = 144.0
+scale = Vector2(0.5, 0.5)
+
+[node name="p2Box" parent="HUD" instance=ExtResource("4_c5que")]
+offset_left = 624.0
+offset_right = 752.0
+scale = Vector2(-0.5, 0.5)
