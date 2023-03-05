@@ -6,7 +6,7 @@ var ready_state: Dictionary = {
 }
 var focus: Dictionary = {
 	'p1': Vector2(0,0),
-	'p2': Vector2(0,3)
+	'p2': Vector2(0,2)
 }
 @onready var cats: Array = [
 	[$Cats/Cat1, $Cats/Cat2, $Cats/Cat3],
@@ -45,8 +45,8 @@ func _input(event):
 			g.player_input_devices['p2'] = 'joypad_' + str(event.device)
 			p2_joined = true
 	if p2_joined:
-		g.p2_cat = '4'
-		$Players/CatP2.set_cat('4')
+		g.p2_cat = '3' # default p2 cat
+		$Players/CatP2.set_cat(g.p2_cat)
 		$Players/CatP2.unready()
 		$Players/CatP2.select('p2_no_label')
 		$Players/CatP2/JoinBoth.visible = false
@@ -54,7 +54,7 @@ func _input(event):
 		$Players/CatP2/JoinJoypad.visible = false
 		$Players/P2.text = 'P2'
 		$Players/P2.modulate = Color('#D4715D')
-		$Cats/Cat4.select('p2')
+		get_node('Cats/Cat'+g.p2_cat).select('p2')
 		ready_state['p2'] = false
 		return
 	# focus change
