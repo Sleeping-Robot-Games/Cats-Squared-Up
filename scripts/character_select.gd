@@ -123,6 +123,14 @@ func focus_changed():
 	else:
 		cats[focus['p1'].x][focus['p1'].y].select('p1')
 		cats[focus['p2'].x][focus['p2'].y].select('p2')
+	# update bottom avatars if not locked in
+	if !ready_state['p1']:
+		var cat_num = cats[focus['p1'].x][focus['p1'].y].name.right(1)
+		$Players/CatP1.set_cat(cat_num)
+	if g.player_input_devices['p2'] != 'bot' and !ready_state['p2']:
+		var cat_num = cats[focus['p2'].x][focus['p2'].y].name.right(1)
+		$Players/CatP2.set_cat(cat_num)
+		
 
 func press_focused(p):
 	# ready
@@ -139,7 +147,7 @@ func press_focused(p):
 			$MenuNo.play()
 			return
 		g.p2_cat = cat_num
-		$Players/CatP1.set_cat(cat_num)
+		$Players/CatP2.set_cat(cat_num)
 		$Players/CatP2.ready_up()
 	ready_state[p] = true
 	# locked in
