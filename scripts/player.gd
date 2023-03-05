@@ -183,8 +183,6 @@ func attempt_combo(combo: Array = []):
 
 # height = 'low' | 'mid' | 'high'
 func dmg(num: int, height: String = 'mid'):
-	print('damaged')
-	print(num)
 	var state = state_machine.get_current_node()
 	if state == 'walk_backward' and height == 'mid':
 		state_machine.travel('straight_block')

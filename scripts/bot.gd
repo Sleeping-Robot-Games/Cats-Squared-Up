@@ -43,14 +43,15 @@ func _process(delta):
 	
 	# getting hit
 	var state = state_machine.get_current_node()
-	print("bot state: " + state)
+	#print("bot state: " + state)
 	if state.ends_with('_hit'):
+		velocity = Vector2.ZERO
 		if state == 'crouch_hit':
-			velocity.x += (HIT_SPEED / 2) if scale.x < 0 else (HIT_SPEED / 2) * -1
+			velocity.x += (HIT_SPEED / 2) if scale.x > 0 else (HIT_SPEED / 2) * -1
 		elif state == 'straight_hit':
-			velocity.x += HIT_SPEED if scale.x < 0 else HIT_SPEED * -1
+			velocity.x += HIT_SPEED if scale.x > 0 else HIT_SPEED * -1
 		elif state == 'jump_hit':
-			velocity.x += HIT_SPEED if scale.x < 0 else HIT_SPEED * -1
+			velocity.x += HIT_SPEED if scale.x > 0 else HIT_SPEED * -1
 			velocity.y -= HIT_SPEED
 		move_and_slide()
 		return
@@ -130,8 +131,6 @@ func set_attack_state(input):
 
 # height = 'low' | 'mid' | 'high'
 func dmg(num: int, height: String = 'mid'):
-	print('damaged')
-	print(num)
 	var state = state_machine.get_current_node()
 	if state == 'walk_backward' and height == 'mid':
 		state_machine.travel('straight_block')
@@ -149,7 +148,6 @@ func dmg(num: int, height: String = 'mid'):
 		hp = 0
 		# TODO death / lose
 	game.change_hp_bar(player, hp)
-	print(player + ' hp: ' + str(hp))
 
 func _on_hit_area_body_entered(body):
 	if !hit_enemies.has(body) and body.has_method('dmg'):
