@@ -14,7 +14,12 @@ var player_input_devices: Dictionary = {
 }
 
 var cat_names: Dictionary = {
-	'1': ''
+	'1': 'pretty',
+	'2': 'atlas',
+	'3': 'monkey',
+	'4': 'faye',
+	'5': 'toad',
+	'6': 'jaime',
 }
 
 # physical input duplicate entries
