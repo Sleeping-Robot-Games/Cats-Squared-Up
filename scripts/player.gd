@@ -7,6 +7,7 @@ var is_floating: bool = false
 var is_moving_left: bool = false
 var is_moving_right: bool = false
 var is_flipped: bool = false
+var is_disabled = false
 var input_buffer: Array = []
 var input_window: float = 0.1
 var time: float = input_window
@@ -35,6 +36,9 @@ func _ready():
 
 func _input(event):
 	if not correct_input(event):
+		return
+	# TODO only allow UI interaction if disabled
+	if is_disabled:
 		return
 	# punch
 	if event.is_action_pressed('keyboard_punch') \
@@ -103,6 +107,8 @@ func correct_input(event) -> bool:
 	return false
 
 func _process(delta: float):
+	if is_disabled:
+		return
 	var state = state_machine.get_current_node()
 	face_opponent()
 	process_state(state)
@@ -198,8 +204,19 @@ func dmg(num: int, height: String = 'mid'):
 	hp -= num
 	if hp <= 0:
 		hp = 0
-		# TODO death / lose
+		lose()
 	game.change_hp_bar(player, hp)
+
+func win():
+	state_machine.travel('victory')
+	var opponent = 'p2' if player == 'p1' else 'p1'
+	is_disabled = true
+
+func lose():
+	state_machine.travel('defeat')
+	var opponent = 'p2' if player == 'p1' else 'p1'
+	g.players[opponent].win()
+	is_disabled = true
 
 func _on_hit_area_body_entered(body):
 	if !hit_enemies.has(body) and body.has_method('dmg'):

@@ -16,6 +16,7 @@ var m_keys = ['straight_punch', 'straight_kick', 'cat_smash']
 var start_moving = false # check if AI is allowed to move
 var is_crouching = false # check if the AI isn't crouching
 var is_attacking = false # check if AI is attacking
+var is_disabled = false # disable cat when round ends
 
 var hp: int = 100
 var hit_enemies: Array = []
@@ -67,6 +68,9 @@ func _process(delta):
 	if !is_on_floor():
 		velocity.y += FALL_SPEED
 		move_and_slide()
+	
+	if is_disabled:
+		return
 	
 	if(!is_attacking && countdown < 0):
 		choose_action()
@@ -146,8 +150,19 @@ func dmg(num: int, height: String = 'mid'):
 	hp -= num
 	if hp <= 0:
 		hp = 0
-		# TODO death / lose
+		lose()
 	game.change_hp_bar(player, hp)
+
+func win():
+	state_machine.travel('victory')
+	var opponent = 'p2' if player == 'p1' else 'p1'
+	is_disabled = true
+
+func lose():
+	state_machine.travel('defeat')
+	var opponent = 'p2' if player == 'p1' else 'p1'
+	g.players[opponent].win()
+	is_disabled = true
 
 func _on_hit_area_body_entered(body):
 	if !hit_enemies.has(body) and body.has_method('dmg'):

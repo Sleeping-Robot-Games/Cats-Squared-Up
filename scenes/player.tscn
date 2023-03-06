@@ -1,4 +1,4 @@
-[gd_scene load_steps=105 format=3 uid="uid://d00gn2tfiviml"]
+[gd_scene load_steps=112 format=3 uid="uid://d00gn2tfiviml"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_cv5f2"]
 [ext_resource type="Texture2D" uid="uid://ty3w66ch64fs" path="res://assets/cattest.png" id="2_52w1c"]
@@ -1252,6 +1252,9 @@ animation = &"crouch_kick"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_g3auo"]
 animation = &"crouch_punch"
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0tv0j"]
+animation = &"defeat"
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6smx7"]
 animation = &"idle"
 
@@ -1284,6 +1287,9 @@ animation = &"straight_kick"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1jpap"]
 animation = &"straight_punch"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_mxfhb"]
+animation = &"victory"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ufl3g"]
 animation = &"walk_backward"
@@ -1424,6 +1430,16 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_uu8x1"]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_gita0"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_tp7fe"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_w1yro"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4gkb7"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_mowyi"]
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_dbt0a"]
 states/End/position = Vector2(-26, 142)
 states/Start/position = Vector2(95, -95)
@@ -1439,6 +1455,8 @@ states/crouch_kick/node = SubResource("AnimationNodeAnimation_6rbcj")
 states/crouch_kick/position = Vector2(743, 314.009)
 states/crouch_punch/node = SubResource("AnimationNodeAnimation_g3auo")
 states/crouch_punch/position = Vector2(743, 223)
+states/defeat/node = SubResource("AnimationNodeAnimation_0tv0j")
+states/defeat/position = Vector2(147, -35.185)
 states/idle/node = SubResource("AnimationNodeAnimation_6smx7")
 states/idle/position = Vector2(436, 100)
 states/jump/node = SubResource("AnimationNodeAnimation_2q38o")
@@ -1461,12 +1479,14 @@ states/straight_kick/node = SubResource("AnimationNodeAnimation_vpja0")
 states/straight_kick/position = Vector2(1171, 125.719)
 states/straight_punch/node = SubResource("AnimationNodeAnimation_1jpap")
 states/straight_punch/position = Vector2(922, 36.7193)
+states/victory/node = SubResource("AnimationNodeAnimation_mxfhb")
+states/victory/position = Vector2(900, 223)
 states/walk_backward/node = SubResource("AnimationNodeAnimation_ufl3g")
 states/walk_backward/position = Vector2(1171, -44)
 states/walk_forward/node = SubResource("AnimationNodeAnimation_xi1d3")
 states/walk_forward/position = Vector2(866, -139.74)
-transitions = ["idle", "straight_punch", SubResource("AnimationNodeStateMachineTransition_eabq1"), "straight_punch", "idle", SubResource("AnimationNodeStateMachineTransition_s34s3"), "crouch_punch", "idle", SubResource("AnimationNodeStateMachineTransition_merjj"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_qmwty"), "idle", "jump", SubResource("AnimationNodeStateMachineTransition_pac8t"), "crouch_block", "idle", SubResource("AnimationNodeStateMachineTransition_7jx3e"), "crouch_idle", "crouch_punch", SubResource("AnimationNodeStateMachineTransition_1glfv"), "crouch_punch", "crouch_idle", SubResource("AnimationNodeStateMachineTransition_v5muy"), "crouch_idle", "idle", SubResource("AnimationNodeStateMachineTransition_pn0a0"), "idle", "crouch_idle", SubResource("AnimationNodeStateMachineTransition_uw5il"), "crouch_idle", "crouch_block", SubResource("AnimationNodeStateMachineTransition_mdu5v"), "crouch_block", "crouch_idle", SubResource("AnimationNodeStateMachineTransition_cytf1"), "jump", "jump_fall", SubResource("AnimationNodeStateMachineTransition_5iqel"), "jump_fall", "jump_land", SubResource("AnimationNodeStateMachineTransition_4sacq"), "straight_kick", "idle", SubResource("AnimationNodeStateMachineTransition_mytjh"), "idle", "straight_hit", SubResource("AnimationNodeStateMachineTransition_eeudv"), "straight_hit", "idle", SubResource("AnimationNodeStateMachineTransition_0ncc0"), "idle", "straight_block", SubResource("AnimationNodeStateMachineTransition_nj2bh"), "straight_block", "idle", SubResource("AnimationNodeStateMachineTransition_h6pxd"), "crouch_idle", "crouch_hit", SubResource("AnimationNodeStateMachineTransition_y0yc1"), "crouch_hit", "crouch_idle", SubResource("AnimationNodeStateMachineTransition_jut77"), "idle", "straight_kick", SubResource("AnimationNodeStateMachineTransition_fn7lt"), "jump_land", "idle", SubResource("AnimationNodeStateMachineTransition_w6dlb"), "jump", "jump_hit", SubResource("AnimationNodeStateMachineTransition_7jkk1"), "jump_hit", "jump_fall", SubResource("AnimationNodeStateMachineTransition_24fa0"), "jump_fall", "jump_hit", SubResource("AnimationNodeStateMachineTransition_ohdjj"), "jump", "jump_punch", SubResource("AnimationNodeStateMachineTransition_ageck"), "jump_punch", "jump_fall", SubResource("AnimationNodeStateMachineTransition_qvuvj"), "jump_fall", "jump_punch", SubResource("AnimationNodeStateMachineTransition_vrmtk"), "jump_land", "straight_hit", SubResource("AnimationNodeStateMachineTransition_fno8e"), "jump_kick", "jump_fall", SubResource("AnimationNodeStateMachineTransition_e4aga"), "jump", "jump_kick", SubResource("AnimationNodeStateMachineTransition_c2rbf"), "jump_fall", "jump_kick", SubResource("AnimationNodeStateMachineTransition_1fiyp"), "crouch_idle", "crouch_kick", SubResource("AnimationNodeStateMachineTransition_fdqkj"), "crouch_kick", "crouch_idle", SubResource("AnimationNodeStateMachineTransition_01edf"), "idle", "cat_smash", SubResource("AnimationNodeStateMachineTransition_w4o6l"), "cat_smash", "idle", SubResource("AnimationNodeStateMachineTransition_4lhyn"), "idle", "walk_forward", SubResource("AnimationNodeStateMachineTransition_tywfr"), "walk_forward", "idle", SubResource("AnimationNodeStateMachineTransition_h3ibj"), "idle", "walk_backward", SubResource("AnimationNodeStateMachineTransition_m3jc1"), "walk_backward", "idle", SubResource("AnimationNodeStateMachineTransition_s7q5n"), "walk_backward", "jump", SubResource("AnimationNodeStateMachineTransition_6veto"), "walk_forward", "jump", SubResource("AnimationNodeStateMachineTransition_nwu4s"), "walk_backward", "straight_hit", SubResource("AnimationNodeStateMachineTransition_phfpg"), "walk_forward", "straight_hit", SubResource("AnimationNodeStateMachineTransition_y7mrh"), "walk_forward", "straight_punch", SubResource("AnimationNodeStateMachineTransition_wa0tg"), "walk_forward", "cat_smash", SubResource("AnimationNodeStateMachineTransition_s1c2q"), "walk_backward", "straight_kick", SubResource("AnimationNodeStateMachineTransition_i34m6"), "walk_forward", "straight_kick", SubResource("AnimationNodeStateMachineTransition_7b76g"), "walk_backward", "cat_smash", SubResource("AnimationNodeStateMachineTransition_kok4c"), "walk_backward", "straight_punch", SubResource("AnimationNodeStateMachineTransition_q3y1i"), "crouch_block", "crouch_hit", SubResource("AnimationNodeStateMachineTransition_eim16"), "crouch_kick", "crouch_hit", SubResource("AnimationNodeStateMachineTransition_q624j"), "crouch_punch", "crouch_hit", SubResource("AnimationNodeStateMachineTransition_uu8x1")]
-graph_offset = Vector2(-509, -187.185)
+transitions = ["idle", "straight_punch", SubResource("AnimationNodeStateMachineTransition_eabq1"), "straight_punch", "idle", SubResource("AnimationNodeStateMachineTransition_s34s3"), "crouch_punch", "idle", SubResource("AnimationNodeStateMachineTransition_merjj"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_qmwty"), "idle", "jump", SubResource("AnimationNodeStateMachineTransition_pac8t"), "crouch_block", "idle", SubResource("AnimationNodeStateMachineTransition_7jx3e"), "crouch_idle", "crouch_punch", SubResource("AnimationNodeStateMachineTransition_1glfv"), "crouch_punch", "crouch_idle", SubResource("AnimationNodeStateMachineTransition_v5muy"), "crouch_idle", "idle", SubResource("AnimationNodeStateMachineTransition_pn0a0"), "idle", "crouch_idle", SubResource("AnimationNodeStateMachineTransition_uw5il"), "crouch_idle", "crouch_block", SubResource("AnimationNodeStateMachineTransition_mdu5v"), "crouch_block", "crouch_idle", SubResource("AnimationNodeStateMachineTransition_cytf1"), "jump", "jump_fall", SubResource("AnimationNodeStateMachineTransition_5iqel"), "jump_fall", "jump_land", SubResource("AnimationNodeStateMachineTransition_4sacq"), "straight_kick", "idle", SubResource("AnimationNodeStateMachineTransition_mytjh"), "idle", "straight_hit", SubResource("AnimationNodeStateMachineTransition_eeudv"), "straight_hit", "idle", SubResource("AnimationNodeStateMachineTransition_0ncc0"), "idle", "straight_block", SubResource("AnimationNodeStateMachineTransition_nj2bh"), "straight_block", "idle", SubResource("AnimationNodeStateMachineTransition_h6pxd"), "crouch_idle", "crouch_hit", SubResource("AnimationNodeStateMachineTransition_y0yc1"), "crouch_hit", "crouch_idle", SubResource("AnimationNodeStateMachineTransition_jut77"), "idle", "straight_kick", SubResource("AnimationNodeStateMachineTransition_fn7lt"), "jump_land", "idle", SubResource("AnimationNodeStateMachineTransition_w6dlb"), "jump", "jump_hit", SubResource("AnimationNodeStateMachineTransition_7jkk1"), "jump_hit", "jump_fall", SubResource("AnimationNodeStateMachineTransition_24fa0"), "jump_fall", "jump_hit", SubResource("AnimationNodeStateMachineTransition_ohdjj"), "jump", "jump_punch", SubResource("AnimationNodeStateMachineTransition_ageck"), "jump_punch", "jump_fall", SubResource("AnimationNodeStateMachineTransition_qvuvj"), "jump_fall", "jump_punch", SubResource("AnimationNodeStateMachineTransition_vrmtk"), "jump_land", "straight_hit", SubResource("AnimationNodeStateMachineTransition_fno8e"), "jump_kick", "jump_fall", SubResource("AnimationNodeStateMachineTransition_e4aga"), "jump", "jump_kick", SubResource("AnimationNodeStateMachineTransition_c2rbf"), "jump_fall", "jump_kick", SubResource("AnimationNodeStateMachineTransition_1fiyp"), "crouch_idle", "crouch_kick", SubResource("AnimationNodeStateMachineTransition_fdqkj"), "crouch_kick", "crouch_idle", SubResource("AnimationNodeStateMachineTransition_01edf"), "idle", "cat_smash", SubResource("AnimationNodeStateMachineTransition_w4o6l"), "cat_smash", "idle", SubResource("AnimationNodeStateMachineTransition_4lhyn"), "idle", "walk_forward", SubResource("AnimationNodeStateMachineTransition_tywfr"), "walk_forward", "idle", SubResource("AnimationNodeStateMachineTransition_h3ibj"), "idle", "walk_backward", SubResource("AnimationNodeStateMachineTransition_m3jc1"), "walk_backward", "idle", SubResource("AnimationNodeStateMachineTransition_s7q5n"), "walk_backward", "jump", SubResource("AnimationNodeStateMachineTransition_6veto"), "walk_forward", "jump", SubResource("AnimationNodeStateMachineTransition_nwu4s"), "walk_backward", "straight_hit", SubResource("AnimationNodeStateMachineTransition_phfpg"), "walk_forward", "straight_hit", SubResource("AnimationNodeStateMachineTransition_y7mrh"), "walk_forward", "straight_punch", SubResource("AnimationNodeStateMachineTransition_wa0tg"), "walk_forward", "cat_smash", SubResource("AnimationNodeStateMachineTransition_s1c2q"), "walk_backward", "straight_kick", SubResource("AnimationNodeStateMachineTransition_i34m6"), "walk_forward", "straight_kick", SubResource("AnimationNodeStateMachineTransition_7b76g"), "walk_backward", "cat_smash", SubResource("AnimationNodeStateMachineTransition_kok4c"), "walk_backward", "straight_punch", SubResource("AnimationNodeStateMachineTransition_q3y1i"), "crouch_block", "crouch_hit", SubResource("AnimationNodeStateMachineTransition_eim16"), "crouch_kick", "crouch_hit", SubResource("AnimationNodeStateMachineTransition_q624j"), "crouch_punch", "crouch_hit", SubResource("AnimationNodeStateMachineTransition_uu8x1"), "idle", "victory", SubResource("AnimationNodeStateMachineTransition_gita0"), "straight_hit", "defeat", SubResource("AnimationNodeStateMachineTransition_tp7fe"), "crouch_hit", "defeat", SubResource("AnimationNodeStateMachineTransition_w1yro"), "idle", "defeat", SubResource("AnimationNodeStateMachineTransition_4gkb7"), "crouch_idle", "defeat", SubResource("AnimationNodeStateMachineTransition_mowyi")]
+graph_offset = Vector2(-9, -209.185)
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_0xhtv"]
 
@@ -1491,7 +1511,7 @@ shape = SubResource("RectangleShape2D_b43tg")
 texture = ExtResource("2_52w1c")
 hframes = 4
 vframes = 14
-frame = 1
+frame = 54
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
