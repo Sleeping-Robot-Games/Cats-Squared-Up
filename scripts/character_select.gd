@@ -65,13 +65,13 @@ func _input(event):
 		players.append('p2')
 	for p in players:
 		if event is InputEvent and g.player_input_devices[p] == 'keyboard':
-			if event.is_action_pressed('keyboard_up'):
+			if event.is_action_pressed('keyboard_ui_up'):
 				focus_prev_row(p)
-			elif event.is_action_pressed('keyboard_down'):
+			elif event.is_action_pressed('keyboard_ui_down'):
 				focus_next_row(p)
-			elif event.is_action_pressed('keyboard_left'):
+			elif event.is_action_pressed('keyboard_ui_left'):
 				focus_prev_column(p)
-			elif event.is_action_pressed('keyboard_right'):
+			elif event.is_action_pressed('keyboard_ui_right'):
 				focus_next_column(p)
 			elif event.is_action_pressed('keyboard_select') \
 			or event.is_action_pressed('keyboard_submit'):

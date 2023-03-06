@@ -13,6 +13,10 @@ var player_input_devices: Dictionary = {
 	'p2': 'bot',
 }
 
+var cat_names: Dictionary = {
+	'1': ''
+}
+
 # physical input duplicate entries
 var ghost_inputs: Array = ['Steam Virtual Gamepad']
 
