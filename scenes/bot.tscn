@@ -1511,7 +1511,7 @@ shape = SubResource("RectangleShape2D_b43tg")
 texture = ExtResource("2_kjtk0")
 hframes = 4
 vframes = 14
-frame = 49
+frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -1524,5 +1524,10 @@ anim_player = NodePath("../AnimationPlayer")
 active = true
 parameters/playback = SubResource("AnimationNodeStateMachinePlayback_00qk0")
 
+[node name="HitTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
 [connection signal="body_entered" from="HitArea" to="." method="_on_hit_area_body_entered"]
 [connection signal="body_exited" from="HitArea" to="." method="_on_hit_area_body_exited"]
+[connection signal="timeout" from="HitTimer" to="." method="_on_hit_timer_timeout"]

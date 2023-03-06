@@ -147,6 +147,8 @@ func dmg(num: int, height: String = 'mid'):
 			state_machine.travel('straight_hit')
 	else:
 		state_machine.travel('jump_hit')
+	$Sprite.modulate = Color(1,0,0,1)
+	$HitTimer.start()
 	hp -= num
 	if hp <= 0:
 		hp = 0
@@ -173,3 +175,6 @@ func _on_hit_area_body_entered(body):
 func _on_hit_area_body_exited(body):
 	if hit_enemies.has(body):
 		hit_enemies.erase(body)
+
+func _on_hit_timer_timeout():
+	$Sprite.modulate = Color(1,1,1,1)
