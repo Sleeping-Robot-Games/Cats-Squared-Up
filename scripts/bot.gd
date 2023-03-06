@@ -162,6 +162,7 @@ func lose():
 	state_machine.travel('defeat')
 	var opponent = 'p2' if player == 'p1' else 'p1'
 	g.players[opponent].win()
+	game.match_winner(opponent)
 	is_disabled = true
 
 func _on_hit_area_body_entered(body):
