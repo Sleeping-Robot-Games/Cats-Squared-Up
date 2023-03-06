@@ -1493,7 +1493,7 @@ graph_offset = Vector2(55, -166.185)
 [node name="Bot" type="CharacterBody2D"]
 scale = Vector2(2, 2)
 collision_layer = 2
-collision_mask = 5
+collision_mask = 13
 script = ExtResource("1_athhj")
 
 [node name="HitArea" type="Area2D" parent="."]
@@ -1511,7 +1511,7 @@ shape = SubResource("RectangleShape2D_b43tg")
 texture = ExtResource("2_kjtk0")
 hframes = 4
 vframes = 14
-frame = 1
+frame = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
